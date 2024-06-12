@@ -1,14 +1,26 @@
 import React from 'react';
 
-function GuessForm({ guess, setGuess, handleFormOnSubmit, isDisabled = false }) {
+function GuessForm({ gameState, handleGuessesAndGameState }) {
+  const [guess, setGuess] = React.useState('');
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    handleGuessesAndGameState(guess);
+    setGuess('');
+  };
+
   return (
-    <form onSubmit={(event) => handleFormOnSubmit(event)}>
+    <form
+      onSubmit={(event) => {
+        handleOnSubmit(event);
+      }}
+    >
       <label htmlFor="guess-input" className="guess-input-wrapper">
         Enter your guess:
       </label>
       <input
         required
-        {...(isDisabled && 'disabled')}
+        disabled={gameState !== 'running'}
         title="5 letter word"
         pattern="[A-Z]{5,5}"
         id="guess-input"
