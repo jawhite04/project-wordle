@@ -1,7 +1,8 @@
 import React from 'react';
 
-function Cell({id, className, value}) {
-  return (<td key={id} className={className}>{value}</td>);
+function Cell({idx, className, children}) {
+  const classNames = className ? `cell ${className}` : 'cell'
+  return (<td key={idx} className={classNames}>{children}</td>);
 }
 
 export default Cell;

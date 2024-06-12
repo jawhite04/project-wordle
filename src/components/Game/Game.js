@@ -5,7 +5,7 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import Cell from '../Cell';
 import Row from '../Row';
-import styles from '../../styles.css'
+import {checkGuess} from '../../game-helpers'
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -16,18 +16,16 @@ function Game() {
   const initialGameState = Array(NUM_OF_GUESSES_ALLOWED).fill(Array(answer.length).fill().map((_, index) => ({
     id: index,
     value: '',
-    className: 'cell'
+    className: ''
   })))
   const [guesses, setGuesses] = React.useState(initialGameState);
   const [numOfGuesses, setNumOfGuesses] = React.useState(0);
+  const [guess, setGuess] = React.useState('');
 
-  console.log(guesses);
-  
   const rows = (guesses.map((guess, rowIndex) => {
-    const cells = guess.map(({id, className, value}) => (<Cell id={id} className={className}>{value}</Cell>))
-
+    const cells = guess.map(({id, className, value}) => (<Cell idx={id} className={className}>{value}</Cell>))
     return (
-    <Row key={rowIndex} id={rowIndex}>
+    <Row idx={rowIndex}>
       {cells}
     </Row>
     )
@@ -35,8 +33,21 @@ function Game() {
 
   return (<>
   <table><tbody>{rows}</tbody></table>
-  <label className={styles['guess-input-wrapper']}>Enter your guess:</label>
-  <input className={styles['guess-input-wrapper']}></input>
+  <form onSubmit={event => {
+    event.preventDefault()
+    
+    const checkResults = checkGuess(guess, answer)
+    
+    guesses[numOfGuesses] = guesses[numOfGuesses].map((g, idx) => ({id: g.id, value: checkResults[idx].letter, className: checkResults[idx].status }))
+    
+    setGuesses(guesses)
+    setNumOfGuesses(numOfGuesses + 1)
+    setGuess('')
+  }}>
+  <label htmlFor='guess-input' className='guess-input-wrapper'>Enter your guess:</label>
+  <input required pattern="[A-Z]{5,5}" id='guess-input' className='guess-input-wrapper' value={guess} onChange={event => setGuess(event.target.value.toUpperCase())} />
+  </form>
+  
   </>)
 }
 
