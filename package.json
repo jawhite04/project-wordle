@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "author": "Josh Comeau <me@joshwcomeau.com>",
-  "contributors": ["John White"],
+  "contributors": [
+    "John White"
+  ],
   "dependencies": {
     "eslint": "8.49.0",
     "eslint-config-react-app": "7.0.1",
@@ -19,7 +21,8 @@
     "predev": "rimraf .parcel-cache dist",
     "dev": "parcel public/index.html",
     "build": "parcel build public/index.html",
-    "new-component": "new-component"
+    "new-component": "new-component",
+    "format": "prettier -w src/**/*.js"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
