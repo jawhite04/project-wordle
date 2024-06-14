@@ -8,13 +8,13 @@ function Cell({ letter, status }) {
   return <span className={classNames}>{letter}</span>;
 }
 
-function Guess({ value, answer }) {
-  const result = checkGuess(value, answer);
+function Guess({ guess, answer }) {
+  const result = checkGuess(guess, answer);
 
   return (
     <p className="guess">
       {Array(WORD_LENGTH)
-        .fill('')
+        .fill()
         .map((_, index) => {
           return (
             <Cell key={index} letter={result?.[index].letter} status={result?.[index].status} />
@@ -30,7 +30,7 @@ function GuessRows({ guesses, answer }) {
       {Array(NUM_OF_GUESSES_ALLOWED)
         .fill()
         .map((_, index) => (
-          <Guess key={index} value={guesses[index]} answer={answer} />
+          <Guess key={index} guess={guesses[index]} answer={answer} />
         ))}
     </div>
   );
