@@ -11,20 +11,18 @@ function GuessForm({ gameState, handleGuessesAndGameState }) {
 
   return (
     <form
+      className="guess-input-wrapper"
       onSubmit={(event) => {
         handleOnSubmit(event);
       }}
     >
-      <label htmlFor="guess-input" className="guess-input-wrapper">
-        Enter your guess:
-      </label>
+      <label htmlFor="guess-input">Enter your guess:</label>
       <input
         required
         disabled={gameState !== 'running'}
         title="5 letter word"
         pattern="[A-Z]{5,5}"
         id="guess-input"
-        className="guess-input-wrapper"
         value={guess}
         onChange={(event) => setGuess(event.target.value.toUpperCase())}
       />
