@@ -1,13 +1,13 @@
 import React from 'react';
 
 function Key({ letter, status }) {
-  const classNames = status ? `cell ${status}` : 'cell';
+  const classNames = status ? `keycap ${status}` : 'keycap';
   return <span className={classNames}>{letter}</span>;
 }
 
 function KeyboardRow({ letters, keysStatus }) {
   return (
-    <p className="guess">
+    <p className="keyboard">
       {letters.map((letter, index) => (
         <Key key={index} letter={letter} status={keysStatus && keysStatus[letter]} />
       ))}

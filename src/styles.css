@@ -124,17 +124,38 @@ h1 {
   --radius: 0px 0px 0px 4px;
 }
 
-.cell.correct {
+.keyboard {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+  justify-content: center;
+}
+
+.keycap {
+  --radius: 4px 4px 4px 4px;
+  background: var(--color-gray-900);
+  width: 40px;
+  height: 52px;
+  position: relative;
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--color-gray-700);
+  border-radius: var(--radius);
+  font-size: 2rem;
+}
+
+.correct {
   background: var(--color-success);
   border-color: var(--color-success);
   color: white;
 }
-.cell.incorrect {
+.incorrect {
   background: var(--color-gray-300);
   border-color: var(--color-gray-300);
   color: white;
 }
-.cell.misplaced {
+.misplaced {
   background: var(--color-warning);
   border-color: var(--color-warning);
   color: white;

@@ -11,6 +11,7 @@ function GuessForm({ gameState, handleGuessesAndGameState }) {
 
   return (
     <form
+      // className="guess-input-wrapper visually-hidden"
       className="guess-input-wrapper"
       onSubmit={(event) => {
         handleOnSubmit(event);
